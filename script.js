@@ -105,7 +105,7 @@ function adjSet(){
         currentWord = wordList[0 + adjCounter]; 
         adjCounter++;
         console.log(currentWord);
-        break;
+        return(currentWord);
     }
 }
 
@@ -114,7 +114,7 @@ function advSet(){
         currentWord = wordList[(adjList.length) + advCounter]; 
         advCounter++;
         console.log(currentWord);
-        break;
+        return(currentWord);
     }
 }
 
@@ -123,7 +123,7 @@ function nounSet(){
         currentWord = wordList[(adjList.length) + (advList.length) + nounCounter]; 
         nounCounter++;
         console.log(currentWord);
-        break;
+        return(currentWord);
     }
 }
 
@@ -132,6 +132,10 @@ function verbSet(){
         currentWord = wordList[(adjList.length) + (advList.length) + (nounList.length) + verbCounter]; 
         verbCounter++;
         console.log(currentWord);
-        break;
+        return(currentWord);
     }
+}
+
+function testerman(){
+    
 }
