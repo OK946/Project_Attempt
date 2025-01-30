@@ -2,12 +2,24 @@ const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", getWords);
 const testButton = document.getElementById("testButton");
 testButton.addEventListener("click", reset);
+const adjButton = document.getElementById("adjButton");
+adjButton.addEventListener("click", adjSet);
+const advButton = document.getElementById("advButton");
+advButton.addEventListener("click", advSet);
+const nounButton = document.getElementById("nounButton");
+nounButton.addEventListener("click", nounSet);
+const verbButton = document.getElementById("verbButton");
+verbButton.addEventListener("click", verbSet);
 let wordList = [];
 let adjList =[];
 let advList =[];
 let nounList =[];
 let verbList =[];
-
+let adjCounter = 0;
+let advCounter = 0;
+let nounCounter = 0;
+let verbCounter = 0;
+let currentWord = "";
 
 function reset(){
     wordList = [];
@@ -21,20 +33,28 @@ function reset(){
 function getWords(){
     getVerb();
     getAdjective();
+    getNoun();
     getAdjective();
+    getAdjective();
+    getAdverb();
+    getNoun();
+    getAdverb();
+    getVerb();
+    let adjListTemp = [].concat(adjList);
+    let advListTemp = [].concat(advList);
+    let nounListTemp = [].concat(nounList);
+    let verbListTemp = [].concat(verbList);
     for(let index = 0; index < adjList.length; index++){
-        wordList.push(adjList[index]);
-
-
+        wordList.push(adjListTemp[index]);
     };
     for(let index = 0; index < advList.length; index++){
-        wordList.push(advList[index]);
+        wordList.push(advListTemp[index]);
     };
     for(let index = 0; index < nounList.length; index++){
-        wordList.push(nounList[index]);
+        wordList.push(nounListTemp[index]);
     };
     for(let index = 0; index < verbList.length; index++){
-        wordList.push(verbList[index]);
+        wordList.push(verbListTemp[index]);
     };
     console.log(wordList);
     startButton.removeEventListener("click",getWords);
@@ -78,4 +98,40 @@ function getVerb(){
         verbList.push(verb);
     }
     console.log(verbList);
+}
+
+function adjSet(){
+    while(adjCounter < adjList.length){
+        currentWord = wordList[0 + adjCounter]; 
+        adjCounter++;
+        console.log(currentWord);
+        break;
+    }
+}
+
+function advSet(){
+    while(advCounter < advList.length){
+        currentWord = wordList[(adjList.length) + advCounter]; 
+        advCounter++;
+        console.log(currentWord);
+        break;
+    }
+}
+
+function nounSet(){
+    while(nounCounter < nounList.length){
+        currentWord = wordList[(adjList.length) + (advList.length) + nounCounter]; 
+        nounCounter++;
+        console.log(currentWord);
+        break;
+    }
+}
+
+function verbSet(){
+    while(verbCounter < verbList.length){
+        currentWord = wordList[(adjList.length) + (advList.length) + (nounList.length) + verbCounter]; 
+        verbCounter++;
+        console.log(currentWord);
+        break;
+    }
 }
