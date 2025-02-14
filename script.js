@@ -15,7 +15,7 @@ const paragraphs = [`A vacation is when you take a trip to some ${adjSet()} plac
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", getWords);
 const testButton = document.getElementById("testButton");
-testButton.addEventListener("click", getPara);
+testButton.addEventListener("click", reset);
 const adjButton = document.getElementById("adjButton");
 adjButton.addEventListener("click", adjSet);
 const advButton = document.getElementById("advButton");
@@ -25,20 +25,20 @@ nounButton.addEventListener("click", nounSet);
 const verbButton = document.getElementById("verbButton");
 verbButton.addEventListener("click", verbSet);
 const output = document.getElementById(`finalText`);
-output.textContent = getPara();
 
 
 function reset(){
-    wordList = [];
-    adjList =[];
-    advList =[];
-    nounList =[];
-    verbList =[];
-    startButton.addEventListener("click", getWords);
+    // wordList = [];
+    // adjList =[];
+    // advList =[];
+    // nounList =[];
+    // verbList =[];
+    // startButton.addEventListener("click", getWords);
+    output.textContent = getPara();
 }
 
 function getWords(){
-    getVerb();
+    getAdjective();
     let adjListTemp = [].concat(adjList);
     let advListTemp = [].concat(advList);
     let nounListTemp = [].concat(nounList);
