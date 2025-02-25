@@ -164,6 +164,8 @@ function getPara(){
         paragraphText: `PlaceHolder2`,
         order: 2,
     };
+
+    // Paragraph Objects Above this Line
     let currentPara = {}
     const paragraphs = [a]
     let currentParaNumber = Math.floor(Math.random() * paragraphs.length);
