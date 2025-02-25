@@ -8,10 +8,11 @@ let advCounter = 0;
 let nounCounter = 0;
 let verbCounter = 0;
 let currentWord = "";
-const paragraphs = [`A vacation is when you take a trip to some ${adjSet()} place with your ${adjSet()} family. Usually you go to some place that is near a/an ${nounSet()} or up on a/an ${nounSet()}. A good vacation place is one where you can ride ${nounSet()} or play ${nounSet()} or go hunting for ${nounSet()} . I like to spend my time ${verbSet()} or ${verbSet()}. When parents go on a vacation, they spend their time eating three ${nounSet()} a day, and fathers play golf, and mothers sit around ${verbSet()}. Last summer, my little brother fell in a/an ${nounSet()} and got poison ${nounSet()} all over his ${nounSet()}. My family is going to go to (the) ${nounSet()}, and I will practice ${verbSet()}. Parents need vacations more than kids because parents are always very ${adjSet()} and because they have to work ${adjSet()} hours every day all year making enough ${nounSet()} to pay for the vacation.`,
-    `1`,
-    `2`
-]
+let adj = adjSet();
+let adv = advSet();
+let noun = nounSet();
+let verb = verbSet();
+
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", getWords);
 const testButton = document.getElementById("testButton");
@@ -28,17 +29,27 @@ const output = document.getElementById(`finalText`);
 
 
 function reset(){
-    // wordList = [];
-    // adjList =[];
-    // advList =[];
-    // nounList =[];
-    // verbList =[];
-    // startButton.addEventListener("click", getWords);
-    output.textContent = getPara();
+    wordList = [];
+    adjList =[];
+    advList =[];
+    nounList =[];
+    verbList =[];
+    startButton.addEventListener("click", getWords);
 }
 
-function getWords(){
-    getAdjective();
+function getWords(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
+    for (let i = 0; i <= adjectiveAmount; i++){
+        getAdjective();
+    }
+    for (let i = 0; i <= adverbAmount; i++){
+        getAdverb();
+    }
+    for (let i = 0; i <= nounAmount; i++){
+        getNoun();
+    }
+    for (let i = 0; i <= verbAmount; i++){
+        getVerb();
+    }
     let adjListTemp = [].concat(adjList);
     let advListTemp = [].concat(advList);
     let nounListTemp = [].concat(nounList);
@@ -50,7 +61,7 @@ function getWords(){
         wordList.push(advListTemp[index]);
     };
     for(let index = 0; index < nounList.length; index++){
-        wordList.push(nounListTemp[index]);
+        wordList.push(nounListTemp[index]);[]
     };
     for(let index = 0; index < verbList.length; index++){
         wordList.push(verbListTemp[index]);
@@ -136,7 +147,34 @@ function verbSet(){
 }
 
 function getPara(){
-    let currentPara = Math.floor(Math.random() * paragraphs.length)
-    console.log(paragraphs[currentPara]);
-    return paragraphs[currentPara];
+    // Paragraph Objects Below this Line
+    const a = {
+        paragraphText: `A vacation is when you take a trip to some ${adjSet()} place with your ${adjSet()} family. Usually you go to some place that is near a/an ${nounSet()} or up on a/an ${nounSet()}. A good vacation place is one where you can ride ${nounSet()} or play ${nounSet()} or go hunting for ${nounSet()} . I like to spend my time ${verbSet()} or ${verbSet()}. When parents go on a vacation, they spend their time eating three ${nounSet()} a day, and fathers play golf, and mothers sit around ${verbSet()}. Last summer, my little brother fell in a/an ${nounSet()} and got poison ${nounSet()} all over his ${nounSet()}. My family is going to go to (the) ${nounSet()}, and I will practice ${verbSet()}. Parents need vacations more than kids because parents are always very ${adjSet()} and because they have to work ${adjSet()} hours every day all year making enough ${nounSet()} to pay for the vacation.`,
+        order: 0,
+        adjNumber: 4,
+        advNumber: 0,
+        nounNumber: 11,
+        verbNumber: 4,
+    };
+    const b = {
+        paragraphText: `PlaceHolder1`,
+        order: 1,
+    };
+    const c = {
+        paragraphText: `PlaceHolder2`,
+        order: 2,
+    };
+    let currentPara = {}
+    const paragraphs = [a]
+    let currentParaNumber = Math.floor(Math.random() * paragraphs.length);
+    for (let i = 0; i < paragraphs.length; i++ ){
+        if(currentParaNumber === paragraphs[i].order){
+            currentPara = paragraphs[i];
+            
+        }
+    }
+
 }
+// Give this poor man a home V
+return currentPara.paragraphText;
+output.textContent = ;
