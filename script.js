@@ -12,6 +12,35 @@ let adj = adjSet();
 let adv = advSet();
 let noun = nounSet();
 let verb = verbSet();
+    // Paragraph Objects Below this Line
+const a = {
+    paragraphText: `A vacation is when you take a trip to some ${adjSet()} place with your ${adjSet()} family. Usually you go to some place that is near a/an ${nounSet()} or up on a/an ${nounSet()}. A good vacation place is one where you can ride ${nounSet()} or play ${nounSet()} or go hunting for ${nounSet()} . I like to spend my time ${verbSet()} or ${verbSet()}. When parents go on a vacation, they spend their time eating three ${nounSet()} a day, and fathers play golf, and mothers sit around ${verbSet()}. Last summer, my little brother fell in a/an ${nounSet()} and got poison ${nounSet()} all over his ${nounSet()}. My family is going to go to (the) ${nounSet()}, and I will practice ${verbSet()}. Parents need vacations more than kids because parents are always very ${adjSet()} and because they have to work ${adjSet()} hours every day all year making enough ${nounSet()} to pay for the vacation.`,
+    order: 0,
+    adjNumber: 4,
+    advNumber: 0,
+    nounNumber: 11,
+    verbNumber: 4,
+};
+const b = {
+    paragraphText: `PlaceHolder1`,
+    order: 1,
+};
+const c = {
+    paragraphText: `PlaceHolder2`,
+    order: 2,
+};
+    
+// Paragraph Objects Above this Line
+let currentPara = {};
+// Update when adding new paragraphs!
+const paragraphs = [a];
+let currentParaNumber = Math.floor(Math.random() * paragraphs.length);
+for (let i = 0; i < paragraphs.length; i++ ){
+    if(currentParaNumber === paragraphs[i].order){
+        currentPara = paragraphs[i];
+        
+    }
+}    
 
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", run);
@@ -151,8 +180,9 @@ function verbSet(){
 }
 
 function getPara(){
+    getWords(currentPara.adjNumber, currentPara.advNumber, currentPara.nounNumber, currentPara.verbNumber)
     // Paragraph Objects Below this Line
-    const a = {
+    const acopy = {
         paragraphText: `A vacation is when you take a trip to some ${adjSet()} place with your ${adjSet()} family. Usually you go to some place that is near a/an ${nounSet()} or up on a/an ${nounSet()}. A good vacation place is one where you can ride ${nounSet()} or play ${nounSet()} or go hunting for ${nounSet()} . I like to spend my time ${verbSet()} or ${verbSet()}. When parents go on a vacation, they spend their time eating three ${nounSet()} a day, and fathers play golf, and mothers sit around ${verbSet()}. Last summer, my little brother fell in a/an ${nounSet()} and got poison ${nounSet()} all over his ${nounSet()}. My family is going to go to (the) ${nounSet()}, and I will practice ${verbSet()}. Parents need vacations more than kids because parents are always very ${adjSet()} and because they have to work ${adjSet()} hours every day all year making enough ${nounSet()} to pay for the vacation.`,
         order: 0,
         adjNumber: 4,
@@ -160,26 +190,17 @@ function getPara(){
         nounNumber: 11,
         verbNumber: 4,
     };
-    const b = {
+    const bcopy = {
         paragraphText: `PlaceHolder1`,
         order: 1,
     };
-    const c = {
+    const ccopy = {
         paragraphText: `PlaceHolder2`,
         order: 2,
     };
-
+    
     // Paragraph Objects Above this Line
-    let currentPara = {}
-    const paragraphs = [a]
-    let currentParaNumber = Math.floor(Math.random() * paragraphs.length);
-    for (let i = 0; i < paragraphs.length; i++ ){
-        if(currentParaNumber === paragraphs[i].order){
-            currentPara = paragraphs[i];
-            
-        }
-    }
-    getWords(currentPara.adjNumber, currentPara.advNumber, currentPara.nounNumber, currentPara.verbNumber)
-    let value = currentPara.paragraphText;
-    return value;
+    let copyParas = [acopy,bcopy,ccopy];
+
+    return copyParas[currentParaNumber].paragraphText;
 }
