@@ -14,7 +14,7 @@ let noun = nounSet();
 let verb = verbSet();
 
 const startButton = document.getElementById("startButton");
-startButton.addEventListener("click", getWords);
+startButton.addEventListener("click", run);
 const testButton = document.getElementById("testButton");
 testButton.addEventListener("click", reset);
 const adjButton = document.getElementById("adjButton");
@@ -36,18 +36,21 @@ function reset(){
     verbList =[];
     startButton.addEventListener("click", getWords);
 }
+function run(){
+    output.textContent = getPara();
+}
 
 function getWords(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
-    for (let i = 0; i <= adjectiveAmount; i++){
+    for (let i = 0; i < adjectiveAmount; i++){
         getAdjective();
     }
-    for (let i = 0; i <= adverbAmount; i++){
+    for (let i = 0; i < adverbAmount; i++){
         getAdverb();
     }
-    for (let i = 0; i <= nounAmount; i++){
+    for (let i = 0; i < nounAmount; i++){
         getNoun();
     }
-    for (let i = 0; i <= verbAmount; i++){
+    for (let i = 0; i < verbAmount; i++){
         getVerb();
     }
     let adjListTemp = [].concat(adjList);
@@ -68,6 +71,7 @@ function getWords(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
     };
     console.log(wordList);
     startButton.removeEventListener("click",getWords);
+
 }
 
 function getAdjective(){
@@ -175,8 +179,7 @@ function getPara(){
             
         }
     }
-
+    getWords(currentPara.adjNumber, currentPara.advNumber, currentPara.nounNumber, currentPara.verbNumber)
+    let value = currentPara.paragraphText;
+    return value;
 }
-// Give this poor man a home V
-return currentPara.paragraphText;
-output.textContent = ;
