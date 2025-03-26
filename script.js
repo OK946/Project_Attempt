@@ -20,6 +20,7 @@ const a = {
     advNumber: 0,
     nounNumber: 11,
     verbNumber: 4,
+    pNounNumber: 1,
 };
 const b = {
     paragraphText: `PlaceHolder1`,
