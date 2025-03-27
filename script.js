@@ -1,8 +1,12 @@
 let wordList = [];
-let adjList =[];
-let advList =[];
-let nounList =[];
-let verbList =[];
+let adjInputs = ``;
+let adjIDs = 0; 
+let advInputs = ``;
+let advIDs = 0; 
+let nounInputs = ``;
+let nounIDs = 0; 
+let verbInputs = ``;
+let verbIDs = 0; 
 let adjCounter = 0;
 let advCounter = 0;
 let nounCounter = 0;
@@ -20,7 +24,6 @@ const a = {
     advNumber: 0,
     nounNumber: 11,
     verbNumber: 4,
-    pNounNumber: 1,
 };
 const b = {
     paragraphText: `PlaceHolder1`,
@@ -58,19 +61,12 @@ verbButton.addEventListener("click", verbSet);
 const output = document.getElementById(`finalText`);
 
 
-function reset(){
-    wordList = [];
-    adjList =[];
-    advList =[];
-    nounList =[];
-    verbList =[];
-    startButton.addEventListener("click", getWords);
-}
 function run(){
     output.textContent = getPara();
 }
 
-function getWords(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
+function getWords1(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
+    adjIDs = 0
     for (let i = 0; i < adjectiveAmount; i++){
         getAdjective();
     }
@@ -83,65 +79,57 @@ function getWords(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
     for (let i = 0; i < verbAmount; i++){
         getVerb();
     }
-    let adjListTemp = [].concat(adjList);
-    let advListTemp = [].concat(advList);
-    let nounListTemp = [].concat(nounList);
-    let verbListTemp = [].concat(verbList);
-    for(let index = 0; index < adjList.length; index++){
+}
+function getWords2(){
+    let adjListTemp = []
+    for(let i = 0; i <= adjIDs; i++){
+        adjListTemp.push(document.getElementById(`adjID${i}`));
+    }
+    let advListTemp = [];
+    for(let i = 0; i <= adjIDs; i++){
+        advListTemp.push(document.getElementById(`advID${i}`));
+    }
+    let nounListTemp = [];
+    for(let i = 0; i <= adjIDs; i++){
+        nounListTemp.push(document.getElementById(`nounID${i}`));
+    }
+    let verbListTemp = [];
+    for(let i = 0; i <= verbIDs; i++){
+        verbListTemp.push(document.getElementById(`verbID${i}`));
+    }
+    for(let index = 0; index < adjListTemp.length; index++){
         wordList.push(adjListTemp[index]);
     };
-    for(let index = 0; index < advList.length; index++){
+    for(let index = 0; index < advListTemp.length; index++){
         wordList.push(advListTemp[index]);
     };
-    for(let index = 0; index < nounList.length; index++){
+    for(let index = 0; index < nounListTemp.length; index++){
         wordList.push(nounListTemp[index]);[]
     };
-    for(let index = 0; index < verbList.length; index++){
+    for(let index = 0; index < verbListTemp.length; index++){
         wordList.push(verbListTemp[index]);
     };
     console.log(wordList);
-    startButton.removeEventListener("click",getWords);
-
 }
 
 function getAdjective(){
-    let adj = prompt("Write an Adjective");
-    if((adj == null) || (adj == false)){
-        getAdjective();
-    } else {
-        adjList.push(adj);
-    }
-    console.log(adjList);
+    adjInputs += `<input id="adjID${adjIDs}" class="wordinput adjInput" placeholder="Write an Adjective">`;
+    adjIDs += 1;
 }
 
 function getAdverb(){
-    let adv = prompt("Write an Adverb");
-    if((adv == null) || (adv == false)){
-        getAdverb();
-    } else {
-        advList.push(adv);
-    }
-    console.log(advList);
+    advInputs += `<input id="adjID${advIDs}" class="wordinput adjInput" placeholder="Write an Adjective">`;
+    advIDs += 1;
 }
 
 function getNoun(){
-    let noun = prompt("Write a Noun");
-    if((noun == null) || (noun == false)){
-        getNoun();
-    } else {
-        nounList.push(noun);
-    }
-    console.log(nounList);
+    nounInputs += `<input id="adjID${nounIDs}" class="wordinput adjInput" placeholder="Write an Adjective">`;
+    nounIDs += 1;
 }
 
 function getVerb(){
-    let verb = prompt("Write a Verb");
-    if((verb == null) || (verb == false)){
-        getVerb();
-    } else {
-        verbList.push(verb);
-    }
-    console.log(verbList);
+    verbInputs += `<input id="adjID${verbIDs}" class="wordinput adjInput" placeholder="Write an Adjective">`;
+    verbIDs += 1;
 }
 
 function adjSet(){
@@ -181,7 +169,7 @@ function verbSet(){
 }
 
 function getPara(){
-    getWords(currentPara.adjNumber, currentPara.advNumber, currentPara.nounNumber, currentPara.verbNumber)
+    getWords1(currentPara.adjNumber, currentPara.advNumber, currentPara.nounNumber, currentPara.verbNumber)
     // Paragraph Objects Below this Line
     const acopy = {
         paragraphText: `A vacation is when you take a trip to some ${adjSet()} place with your ${adjSet()} family. Usually you go to some place that is near a/an ${nounSet()} or up on a/an ${nounSet()}. A good vacation place is one where you can ride ${nounSet()} or play ${nounSet()} or go hunting for ${nounSet()} . I like to spend my time ${verbSet()} or ${verbSet()}. When parents go on a vacation, they spend their time eating three ${nounSet()} a day, and fathers play golf, and mothers sit around ${verbSet()}. Last summer, my little brother fell in a/an ${nounSet()} and got poison ${nounSet()} all over his ${nounSet()}. My family is going to go to (the) ${nounSet()}, and I will practice ${verbSet()}. Parents need vacations more than kids because parents are always very ${adjSet()} and because they have to work ${adjSet()} hours every day all year making enough ${nounSet()} to pay for the vacation.`,
