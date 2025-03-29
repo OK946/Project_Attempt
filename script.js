@@ -20,6 +20,8 @@ let adj = adjSet();
 let adv = advSet();
 let noun = nounSet();
 let verb = verbSet();
+
+let test = 0;
 // Paragraph Objects Below this Line
 const a = {
     paragraphText: `A vacation is when you take a trip to some ${adjSet()} place with your ${adjSet()} family. Usually you go to some place that is near a/an ${nounSet()} or up on a/an ${nounSet()}. A good vacation place is one where you can ride ${nounSet()} or play ${nounSet()} or go hunting for ${nounSet()} . I like to spend my time ${verbSet()} or ${verbSet()}. When parents go on a vacation, they spend their time eating three ${nounSet()} a day, and fathers play golf, and mothers sit around ${verbSet()}. Last summer, my little brother fell in a/an ${nounSet()} and got poison ${nounSet()} all over his ${nounSet()}. My family is going to go to (the) ${nounSet()}, and I will practice ${verbSet()}. Parents need vacations more than kids because parents are always very ${adjSet()} and because they have to work ${adjSet()} hours every day all year making enough ${nounSet()} to pay for the vacation.`,
@@ -53,20 +55,24 @@ for (let i = 0; i < paragraphs.length; i++ ){
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", run);
 const testButton = document.getElementById("testButton");
-const adjButton = document.getElementById("adjButton");
-adjButton.addEventListener("click", adjSet);
-const advButton = document.getElementById("advButton");
-advButton.addEventListener("click", advSet);
-const nounButton = document.getElementById("nounButton");
-nounButton.addEventListener("click", nounSet);
-const verbButton = document.getElementById("verbButton");
-verbButton.addEventListener("click", verbSet);
 const output = document.getElementById(`finalText`);
 
 
 function run(){
     output.textContent = getPara();
     startButton.removeEventListener("click", run);
+    testButton.addEventListener("click", increment);
+}
+
+function increment(){
+    test = 1;
+    getWords2()
+    if ((wordList[0]) || (wordList[1]) || (wordList[2]) || (wordList[3]) || (wordList[4]) || (wordList[5])){
+        test = 0;
+        output.textContent = "Make sure to fill in all of the boxes."
+    } else {
+        output.textContent = getParaLite();
+    }
 }
 
 function getWords1(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
@@ -94,20 +100,20 @@ function getWords1(adjectiveAmount,adverbAmount,nounAmount,verbAmount){
 }
 function getWords2(){
     adjList = [];
-    for(let i = 0; i <= adjIDs; i++){
-        adjList.push(document.getElementById(`adjID${i}`));
+    for(let i = 0; i < adjIDs; i++){
+        adjList.push(document.getElementById(`adjID${i}`).value);
     }
     advList = [];
-    for(let i = 0; i <= adjIDs; i++){
-        advList.push(document.getElementById(`advID${i}`));
+    for(let i = 0; i < advIDs; i++){
+        advList.push(document.getElementById(`advID${i}`).value);
     }
     nounList = [];
-    for(let i = 0; i <= adjIDs; i++){
-        nounList.push(document.getElementById(`nounID${i}`));
+    for(let i = 0; i < nounIDs; i++){
+        nounList.push(document.getElementById(`nounID${i}`).value);
     }
     verbList = [];
-    for(let i = 0; i <= verbIDs; i++){
-        verbList.push(document.getElementById(`verbID${i}`));
+    for(let i = 0; i < verbIDs; i++){
+        verbList.push(document.getElementById(`verbID${i}`).value);
     }
     for(let index = 0; index < adjList.length; index++){
         wordList.push(adjList[index]);
@@ -130,17 +136,17 @@ function getAdjective(){
 }
 
 function getAdverb(){
-    advInputs += `<input id="adjID${advIDs}" class="wordinput adjInput" placeholder="Write an Adverb">`;
+    advInputs += `<input id="advID${advIDs}" class="wordinput adjInput" placeholder="Write an Adverb">`;
     advIDs += 1;
 }
 
 function getNoun(){
-    nounInputs += `<input id="adjID${nounIDs}" class="wordinput adjInput" placeholder="Write a Noun">`;
+    nounInputs += `<input id="nounID${nounIDs}" class="wordinput adjInput" placeholder="Write a Noun">`;
     nounIDs += 1;
 }
 
 function getVerb(){
-    verbInputs += `<input id="adjID${verbIDs}" class="wordinput adjInput" placeholder="Write a Verb">`;
+    verbInputs += `<input id="verbID${verbIDs}" class="wordinput adjInput" placeholder="Write a Verb">`;
     verbIDs += 1;
 }
 
@@ -204,6 +210,37 @@ function getPara(){
     
     // Paragraph Objects Above this Line
     let copyParas = [acopy,bcopy,ccopy];
-    
-    return copyParas[currentParaNumber].paragraphText;
+    if(test !== 1){
+        return "Type your words in the boxes below and then see the completed paragraph!"
+    } else {
+        return copyParas[currentParaNumber].paragraphText; 
+    }
+}
+
+function getParaLite(){
+        // Paragraph Objects Below this Line
+        const acopy = {
+            paragraphText: `A vacation is when you take a trip to some ${adjSet()} place with your ${adjSet()} family. Usually you go to some place that is near a/an ${nounSet()} or up on a/an ${nounSet()}. A good vacation place is one where you can ride ${nounSet()} or play ${nounSet()} or go hunting for ${nounSet()} . I like to spend my time ${verbSet()} or ${verbSet()}. When parents go on a vacation, they spend their time eating three ${nounSet()} a day, and fathers play golf, and mothers sit around ${verbSet()}. Last summer, my little brother fell in a/an ${nounSet()} and got poison ${nounSet()} all over his ${nounSet()}. My family is going to go to (the) ${nounSet()}, and I will practice ${verbSet()}. Parents need vacations more than kids because parents are always very ${adjSet()} and because they have to work ${adjSet()} hours every day all year making enough ${nounSet()} to pay for the vacation.`,
+            order: 0,
+            adjNumber: 4,
+            advNumber: 0,
+            nounNumber: 11,
+            verbNumber: 4,
+        };
+        const bcopy = {
+            paragraphText: `PlaceHolder1`,
+            order: 1,
+        };
+        const ccopy = {
+            paragraphText: `PlaceHolder2`,
+            order: 2,
+        };
+        
+        // Paragraph Objects Above this Line
+        let copyParas = [acopy,bcopy,ccopy];
+        if(test !== 1){
+            return "Type your words in the boxes below and then see the completed paragraph!"
+        } else {
+            return copyParas[currentParaNumber].paragraphText; 
+        }
 }
